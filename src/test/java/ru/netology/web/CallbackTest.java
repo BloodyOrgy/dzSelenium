@@ -53,12 +53,12 @@ class CallbackTest {
 
     @Test
     public void shouldBeFailedEmptyNameInput() {
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+78996788347");
+       driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+78996788347");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
-        driver.findElement(By.cssSelector("button.button")).click();
+       driver.findElement(By.cssSelector("button.button")).click();
         assertEquals("Поле обязательно для заполнения",
-                driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText().trim());
-        assertTrue(driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).isDisplayed());
+               driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText().trim());
+       assertTrue(driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).isDisplayed());
     }
 }
 
