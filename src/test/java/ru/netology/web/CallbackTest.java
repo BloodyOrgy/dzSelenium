@@ -60,5 +60,40 @@ class CallbackTest {
                driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText().trim());
        assertTrue(driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).isDisplayed());
     }
+
+    @Test
+    public void shouldBeFailedEnteringNameInLatin() {
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Andrey");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79372785728");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button.button")).click();
+                assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.",
+                driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText().trim());
+        assertTrue(driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).isDisplayed());
+
+
+    }
+    @Test
+    public void shouldBeFailedEnteringPhoneWrongNumber() {
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Обмайкин Андрей Юрьевич");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("79372785728");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button.button")).click();
+        assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.",
+                driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim());
+        assertTrue(driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).isDisplayed());
+
+    }
+
+    @Test
+    public void shouldBeFailedDontClickCheckbox() {
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Обмайкин Андрей Юрьевич");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79372785728");
+        driver.findElement(By.cssSelector("button.button")).click();
+        assertTrue(driver.findElement(By.cssSelector("[data-test-id='agreement'].input_invalid")).isDisplayed());
+
+
+    }
+
 }
 
